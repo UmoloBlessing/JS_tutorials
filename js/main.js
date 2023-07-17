@@ -1659,5 +1659,5 @@ document.getElementById("textForm").addEventListener("submit", (event) => {
     const encodedCleanText = encodeURI(newText);
     console.log(encodedInputtext);
     console.log(encodedCleanText);
-})
+});
 
