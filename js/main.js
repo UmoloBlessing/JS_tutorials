@@ -1576,34 +1576,88 @@
 // MAYBE FROM A FORM
 
 
-const getDataFromForm = () => {
-    const requestObj = {
-        firstName: "Bruce",
-        lastName: "Lee",
-        categories: ["nerdy"]
-    };
+// const getDataFromForm = () => {
+//     const requestObj = {
+//         firstName: "Bruce",
+//         lastName: "Lee",
+//         categories: ["nerdy"]
+//     };
 
-    return requestObj;
-}
-
-
-const buildRequestUrl = (requestData) => {
-    return `http://api.icndb.com/jokes/random?firstName=${requestData.firstName}&lastName=${requestData.lastName}&limitTo=${requestData.categories}`;
-}
+//     return requestObj;
+// }
 
 
-const requestJoke = async (url) => {
-
-    const response = await fetch(url);
-
-    const jsonResponse = await response.json();
-    console.log(jsonResponse.value.joke);
-
-}
-
-requestJoke("Clint", "Eastwood");
+// const buildRequestUrl = (requestData) => {
+//     return `http://api.icndb.com/jokes/random?firstName=${requestData.firstName}&lastName=${requestData.lastName}&limitTo=${requestData.categories}`;
+// }
 
 
+// const requestJoke = async (url) => {
+
+//     const response = await fetch(url);
+
+//     const jsonResponse = await response.json();
+//     const joke = jsonResponse.value.joke;
+//     console.log(joke);
+
+// }
+
+// const postJokeToPage = (joke) => {
+//     console.log(joke);
+// }
+
+// // PROCEDURE WORKFLOW FUNCTION
+
+// const processJokeRequest = async () => {
+//     const requestData = getDataFromForm();
+//     const requestUrl = buildRequestUrl(requestData);
+//     await requestJoke(requestUrl);
+//     console.log("Finished!");
+// }
+
+// processJokeRequest();
 
 
+
+// REG EX
+
+
+document.getElementById("phoneNum").addEventListener("input", (event) =>{
+    const regex = /^\(?(\d{3})\)?[-. ]?(\d{3})[-. ]?(\d{4})$/g;
+    const input = document.getElementById("phoneNum");
+    const format = document.querySelector(".phoneFormat");
+    const phone = input.value;
+    const found = regex.test(phone);
+
+    if (!found && phone.length) {
+        input.classList.add("invalid");
+        format.classList.add("block");
+    } else {
+        input.classList.remove("invalid");
+        format.classList.remove("block");
+    }
+});
+
+document.getElementById("phoneForm").addEventListener("submit", (event) => {
+    event.preventDefault();
+    const input = document.getElementById("phoneNum");
+    const regex = /[()-. ]/g;
+    const savedPhoneNum = input.value.replaceAll(regex, "");
+    console.log(savedPhoneNum);
+});
+
+
+document.getElementById("textForm").addEventListener("submit", (event) => {
+    event.preventDefault();
+    const input = document.getElementById("textEntry");
+    const regex = / {2,}/g;
+    const newText = input.value.replaceAll(regex, " ").trim();
+    console.log(newText);
+
+    // SENDING TO API
+    const encodedInputtext = encodeURI(input.value);
+    const encodedCleanText = encodeURI(newText);
+    console.log(encodedInputtext);
+    console.log(encodedCleanText);
+})
 
